@@ -4,6 +4,7 @@
 *.dtmp
 ~*
 *.bkp
+.gitmodules
 
 # Modelsim files
 *.wlf
