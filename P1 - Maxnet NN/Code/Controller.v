@@ -1,8 +1,8 @@
 `define IDLE         6'd0
-`define L1           6'd1
-`define L2           6'd2
-`define L3           6'd3
-`define L4           6'd4
+`define LD1          6'd1
+`define LD2          6'd2
+`define LD3          6'd3
+`define LD4          6'd4
 `define MUL          6'd5
 `define SUM1         6'd6
 `define SUM2         6'd7
@@ -10,10 +10,10 @@
 `define CHECK        6'd9
 `define STORE        6'd10
 
-module CU(clk, rst, start, done, flag, l1, l2, l3, l4);
+module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
     
     input clk, rst, start, flag;
-    output l1, l2, l3, l4;
+    output ld1, ld2, ld3, ld4;
     output done;
     
     reg [5:0] ns, ps;
@@ -26,13 +26,13 @@ module CU(clk, rst, start, done, flag, l1, l2, l3, l4);
             ps <= ns;
     end
     
-    always @(ps, start, flag, l1, l2, l3, l4) begin
+    always @(ps, start, flag, ld1, ld2, ld3, ld4) begin
         case (ps)
-            `IDLE        : ns = (start)? `L1: `IDLE;
-            `L1          : ns = `L2;
-            `L2          : ns = `L3;
-            `L3          : ns = `L4;
-            `L4          : ns = `MUL;
+            `IDLE        : ns = (start)? `LD1: `IDLE;
+            `LD1         : ns = `LD2;
+            `LD2         : ns = `LD3;
+            `LD3         : ns = `LD4;
+            `LD4         : ns = `MUL;
             `MUL         : ns = `SUM1;
             `SUM1        : ns = `SUM2;
             `SUM2        : ns = `ACTIVE_FUNC;
@@ -44,13 +44,13 @@ module CU(clk, rst, start, done, flag, l1, l2, l3, l4);
     end
     
     always @(ps) begin
-        {l1, l2, l3, l4, done} = 5'b0;
+        {ld1, ld2, ld3, ld4, done} = 5'b0;
         case (ps)
             `IDLE        : ;
-            `L1          : ;
-            `L2          : ;
-            `L3          : ;
-            `L4          : ;
+            `LD1         : ;
+            `LD2         : ;
+            `LD3         : ;
+            `LD4         : ;
             `MUL         : ;
             `SUM1        : ;
             `SUM2        : ;
