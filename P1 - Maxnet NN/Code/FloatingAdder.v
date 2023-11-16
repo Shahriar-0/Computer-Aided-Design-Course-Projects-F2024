@@ -20,7 +20,7 @@ module FloatingAddition #(parameter XLEN = 32)
     reg [2:0] one_hot;
     reg comp;
     reg [7:0] exp_adjust;
-
+    
     always @(*) begin
         comp = (A[30:23] > = B[30:23])? 1'b1 : 1'b0;
         
