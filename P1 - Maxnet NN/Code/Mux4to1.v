@@ -4,6 +4,7 @@ module mux4to1 (input [31:0] a,
                 d,
                 input [1:0] sel,
                 output reg [31:0] y);
+                
     always @(*) begin
         case (sel)
             2'b00: y   = a;
