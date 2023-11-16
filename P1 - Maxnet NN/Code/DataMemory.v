@@ -1,10 +1,10 @@
-module DataMemory (input clock,
+module DataMemory (input clk,
                    writeEn,
-                   reset,
+                   rst,
                    input [1:0] address,
                    input [31:0] write_data,
                    output [31:0] read_data);
-                   
+    
     reg [3:0] data_mem [31:0];
     
     initial begin
@@ -13,8 +13,8 @@ module DataMemory (input clock,
     
     assign read_data = data_mem[address];
     
-    always @(posedge clock, posedge reset) begin
-        if (reset)
+    always @(posedge clk, posedge rst) begin
+        if (rst)
             $readmemh("DataMemory.txt", data_mem);
         
         else if (writeEn)
@@ -22,9 +22,9 @@ module DataMemory (input clock,
     end
     
     
-    always @(posedge clock) begin
+    always @(posedge clk) begin
         if (writeEn)
             $writememh("DataMemory.txt", data_mem);
-    end
+            end
         
-endmodule
+        endmodule
