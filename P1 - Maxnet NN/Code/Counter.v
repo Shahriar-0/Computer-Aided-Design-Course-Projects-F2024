@@ -1,9 +1,7 @@
 module Counter2bit(input rst,
                    clk,
                    init,
-                   ld,
                    en,
-                   input [1:0] prl,
                    output reg [1:0] out,
                    output Co);
     
