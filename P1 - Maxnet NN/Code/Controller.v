@@ -10,10 +10,10 @@
 `define CHECK        6'd9
 `define STORE        6'd10
 
-module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
+module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4,mux1_sel, ldm1, ldm2, ldm3, ldm4);
     
     input clk, rst, start, flag;
-    output ld1, ld2, ld3, ld4;
+    output ld1, ld2, ld3, ld4, ldm1, ldm2, ldm3, ldm4,mux1_sel;
     output done;
     
     reg [5:0] ns, ps;
@@ -26,7 +26,7 @@ module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
             ps <= ns;
     end
     
-    always @(ps, start, flag, ld1, ld2, ld3, ld4) begin
+    always @(ps, start, flag, ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4,mux1_se) begin
         case (ps)
             `IDLE        : ns = (start)? `LD1: `IDLE;
             `LD1         : ns = `LD2;
@@ -44,20 +44,20 @@ module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
     end
     
     always @(ps) begin
-        {ld1, ld2, ld3, ld4, done} = 5'b0;
+        {ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4, mux1_se, done} = 10'b0;
         case (ps)
-            `IDLE        : ;
-            `LD1         : ;
-            `LD2         : ;
-            `LD3         : ;
-            `LD4         : ;
-            `MUL         : ;
-            `SUM1        : ;
-            `SUM2        : ;
-            `ACTIVE_FUNC : ;
-            `CHECK       : ;
-            `STORE       : ;
-            default      : ;
+            `IDLE        :10'b0 ;
+            `LD1         :10'b1000100010 ;
+            `LD2         :10'b0100010010 ;
+            `LD3         :10'b0010001010 ;
+            `LD4         :10'b0001000110 ;
+            `MUL         :10'b0 ;
+            `SUM1        :10'b0 ;
+            `SUM2        :10'b0 ;
+            `ACTIVE_FUNC :10'b0 ;
+            `CHECK       :10'b0 ;
+            `STORE       :10'b0000000001 ;
+            default      : 10'b0;
         endcase
     end
 endmodule
