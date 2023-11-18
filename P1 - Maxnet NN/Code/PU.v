@@ -9,37 +9,27 @@ module ProcessingUnit #(parameter XLEN = 32)
                         weight3,
                         weight4,
                         input clk,
-                        input l1,l2,l3,
+                        rst,
+                        l1,
+                        l2,
+                        l3,
                         output [XLEN-1:0] result);
     
-    wire [XLEN-1:0] mult1, mult2, mult3, mult4,R1Out,R2Out,R3Out,R4Out,R5Out,R6Out,R7Out;
+    wire [XLEN-1:0] mult1, mult2, mult3, mult4, R1Out, R2Out, R3Out, R4Out, add1, add2, add3;
     
-    wire [XLEN-1:0] add1, add2;
+    FloatingMultiplication #(XLEN) multInst1(.a(num1), .b(weight1), .result(mult1));
+    FloatingMultiplication #(XLEN) multInst2(.a(num2), .b(weight2), .result(mult2));
+    FloatingMultiplication #(XLEN) multInst3(.a(num3), .b(weight3), .result(mult3));
+    FloatingMultiplication #(XLEN) multInst4(.a(num4), .b(weight4), .result(mult4));
     
-    FloatingMultiplication #(XLEN) mult_inst1 (.A(num1), .B(weight1), .clk(clk), .result(mult1));
-    FloatingMultiplication #(XLEN) mult_inst2 (.A(num2), .B(weight2), .clk(clk), .result(mult2));
-    FloatingMultiplication #(XLEN) mult_inst3 (.A(num3), .B(weight3), .clk(clk), .result(mult3));
-    FloatingMultiplication #(XLEN) mult_inst4 (.A(num4), .B(weight4), .clk(clk), .result(mult4));
+    Register R1(.clk(clk), .rst(rst), .in(mult1), .out(R1Out), .ld(1'b1));
+    Register R2(.clk(clk), .rst(rst), .in(mult2), .out(R2Out), .ld(1'b1));
+    Register R3(.clk(clk), .rst(rst), .in(mult3), .out(R3Out), .ld(1'b1));
+    Register R4(.clk(clk), .rst(rst), .in(mult4), .out(R4Out), .ld(1'b1));
     
-    Register R11(.clk(clk),.rst(rst),.data_in(mult1),.data_out(R1Out),.load_enable(l1));
-    Register R21(.clk(clk),.rst(rst),.data_in(mult2),.data_out(R2Out),.load_enable(l1));
-    Register R31(.clk(clk),.rst(rst),.data_in(mult3),.data_out(R3Out),.load_enable(l1));
-    Register R41(.clk(clk),.rst(rst),.data_in(mult4),.data_out(R4Out),.load_enable(l1));
+    FloatingAddition #(XLEN) addInst1(.a(R1Out), .b(R2Out), .result(add1));
+    FloatingAddition #(XLEN) addInst2(.a(R3Out), .b(R3Out), .result(add2));
+    FloatingAddition #(XLEN) add_inst3(.a(add1), .b(add2),  .result(add3));
     
-    
-    
-    FloatingAddition #(XLEN) add_inst1 (.A(R1Out), .B(R2Out), .clk(clk), .result(add1));
-    FloatingAddition #(XLEN) add_inst2 (.A(R3Out), .B(R3Out), .clk(clk), .result(add2));
-
-    Register RS1(.clk(clk),.rst(rst),.data_in(add1),.data_out(R5Out),.load_enable(l2));
-    Register RS2(.clk(clk),.rst(rst),.data_in(add2),.data_out(R6Out),.load_enable(l2));
- 
-    
-    FloatingAddition #(XLEN) add_inst3 (.A(R5Out), .B(R6Out), .clk(clk), .result(result));
-
-    
-
-
-    
-    
+    Register R5(.clk(clk), .rst(rst), .in(add3), .out(result), .ld(1'b1));
 endmodule
