@@ -1,59 +1,32 @@
-module FloatingAddition #(parameter XLEN = 32)
-                         (input [XLEN-1:0]A,
-                          input [XLEN-1:0]B,
-                          input clk,
-                          output reg [XLEN-1:0] result);
+module Multiplier #(parameter N = 32)
+                   (input [N-1:0] a,
+                    b,
+                    output reg [N-1:0] result);
     
-    reg [23:0] MantisA,MantisB;
-    reg [23:0] MantisT;
-    reg [22:0] Mantissa;
-    reg [7:0] E;
-    reg Sign;
-    wire MSB;
-    reg [7:0] A_E, B_E, Temp_E, diff_E;
-    reg signA, signB, Temp_sign;
-    reg [32:0] Temp;
-    reg carry;
-    reg [2:0] one_hot;
-    reg comp;
-    reg [7:0] exp_adjust;
+    reg [47:0] tempMantis;
+    reg [23:0] aMantis, bMantis;
+    reg [22:0] resultMantis;
+    reg [7:0] aExp, bExp, tmpExp, resultExp;
+    reg aSign, bSign, resultSign;
     
     always @(*) begin
-        comp = (A[30:23] >= B[30:23]) ? 1'b1 : 1'b0;
+        aMantis = {1'b1,a[22:0]};
+        aExp    = a[30:23];
+        aSign   = a[31];
         
-        MantisA = comp ? {1'b1,A[22:0]} : {1'b1,B[22:0]};
-        A_E     = comp ? A[30:23] : B[30:23];
-        signA   = comp ? A[31] : B[31];
+        bMantis = {1'b1,b[22:0]};
+        bExp    = b[30:23];
+        bSign   = b[31];
         
-        MantisB = comp ? {1'b1,B[22:0]} : {1'b1,A[22:0]};
-        B_E     = comp ? B[30:23] : A[30:23];
-        signB   = comp ? B[31] : A[31];
+        tmpExp     = aExp + bExp - 127;
+        tempMantis = aMantis * bMantis;
         
-        diff_E          = A_E-B_E;
-        MantisB         = (MantisB >> diff_E);
-        {carry,MantisT} = (signA ~^ signB)? MantisA + MantisB : MantisA-MantisB ;
-        exp_adjust      = A_E;
-        if (carry)
-        begin
-            MantisT    = MantisT>>1;
-            exp_adjust = exp_adjust+1'b1;
-        end
-        else
-        begin
-            while(!MantisT[23])
-            begin
-                MantisT    = MantisT<<1;
-                exp_adjust = exp_adjust-1'b1;
-            end
-        end
-        Sign      = signA;
-        Mantissa  = MantisT[22:0];
-        E         = exp_adjust;
-        result = {Sign, E, Mantissa};
-        MantisT   = (signA ~^ signB) ? (carry ? MantisT>>1 : MantisT) : (0);
-        Temp_E    = carry ? A_E + 1'b1 : A_E;
-        Temp_sign = signA;
-        result    = {Temp_sign, Temp_E, MantisT[22:0]};
-        result    = (A == 32'b0 | B == 32'b0) ? 32'b0 : result;
+        resultMantis = tempMantis[47] ? tempMantis[46:24] : tempMantis[45:23];
+        resultExp    = tempMantis[47] ? tmpExp + 1'b1 : tmpExp;
+        
+        resultSign = aSign ^ bSign;
+        
+        result = (a == 32'b0 || b == 32'b0) ? 0 : {resultSign, resultExp, resultMantis};
     end
+    
 endmodule
