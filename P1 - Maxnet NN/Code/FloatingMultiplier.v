@@ -1,32 +1,32 @@
-`timescale 1ns / 1ps
-module FloatingMultiplication #(parameter XLEN = 32)
-                               (input [XLEN-1:0]A,
-                                input [XLEN-1:0]B,
-                                input clk,
-                                output reg [XLEN-1:0] result);
+module Multiplier #(parameter N = 32)
+                   (input [N-1:0] a,
+                    b,
+                    output reg [N-1:0] result);
     
-    reg [23:0] A_Mantissa,B_Mantissa;
-    reg [22:0] Mantissa;
-    reg [47:0] Temp_Mantissa;
-    reg [7:0] A_Exponent, B_Exponent, Temp_Exponent, diff_Exponent, Exponent;
-    reg A_sign, B_sign, Sign;
-    reg [32:0] Temp;
-    reg [6:0] exp_adjust;
+    reg [47:0] tempMantis;
+    reg [23:0] aMantis, bMantis;
+    reg [22:0] resultMantis;
+    reg [7:0] aExp, bExp, tmpExp, resultExp;
+    reg aSign, bSign, resultSign;
     
-    always@(*) begin
-        A_Mantissa = {1'b1,A[22:0]};
-        A_Exponent = A[30:23];
-        A_sign     = A[31];
+    always @(*) begin
+        aMantis = {1'b1,a[22:0]};
+        aExp    = a[30:23];
+        aSign   = a[31];
         
-        B_Mantissa = {1'b1,B[22:0]};
-        B_Exponent = B[30:23];
-        B_sign     = B[31];
+        bMantis = {1'b1,b[22:0]};
+        bExp    = b[30:23];
+        bSign   = b[31];
         
-        Temp_Exponent = A_Exponent + B_Exponent-127;
-        Temp_Mantissa = A_Mantissa * B_Mantissa;
-        Mantissa      = Temp_Mantissa[47] ? Temp_Mantissa[46:24] : Temp_Mantissa[45:23];
-        Exponent      = Temp_Mantissa[47] ? Temp_Exponent + 1'b1 : Temp_Exponent;
-        Sign          = A_sign ^ B_sign;
-        result        = {Sign, Exponent, Mantissa};
+        tmpExp     = aExp + bExp - 127;
+        tempMantis = aMantis * bMantis;
+        
+        resultMantis = tempMantis[47] ? tempMantis[46:24] : tempMantis[45:23];
+        resultExp    = tempMantis[47] ? tmpExp + 1'b1 : tmpExp;
+        
+        resultSign = aSign ^ bSign;
+        
+        result = (a == 32'b0 || b == 32'b0) ? 0 : {resultSign, resultExp, resultMantis};
     end
+    
 endmodule
