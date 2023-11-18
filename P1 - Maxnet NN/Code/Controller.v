@@ -8,16 +8,16 @@
 `define SUM2         6'd7
 `define ACTIVE_FUNC  6'd8
 `define CHECK        6'd9
-`define STORE        6'd10
+`define STORE        6'd10 
 
-module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
+module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4,mux1_sel, ldm1, ldm2, ldm3, ldm4,address,l1,l2,l3);
     
     input clk, rst, start, flag;
-    output ld1, ld2, ld3, ld4;
-    output done;
+    output reg ld1, ld2, ld3, ld4, ldm1, ldm2, ldm3, ldm4, mux1_sel,l1,l2,l3;
+    output reg done;
+    output reg [1:0]address;
     
     reg [5:0] ns, ps;
-    reg done;
     
     always @(posedge clk, posedge rst) begin
         if (rst)
@@ -26,7 +26,7 @@ module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
             ps <= ns;
     end
     
-    always @(ps, start, flag, ld1, ld2, ld3, ld4) begin
+    always @(ps, start, flag, ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4,mux1_sel,done,address,l1,l2,l3) begin
         case (ps)
             `IDLE        : ns = (start)? `LD1: `IDLE;
             `LD1         : ns = `LD2;
@@ -35,8 +35,7 @@ module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
             `LD4         : ns = `MUL;
             `MUL         : ns = `SUM1;
             `SUM1        : ns = `SUM2;
-            `SUM2        : ns = `ACTIVE_FUNC;
-            `ACTIVE_FUNC : ns = `CHECK;
+            `SUM2        : ns = `CHECK;
             `CHECK       : ns = (flag)? `MUL : `STORE;
             `STORE       : ns = `IDLE;
             default      : ns = `IDLE;
@@ -44,20 +43,19 @@ module CU(clk, rst, start, done, flag, ld1, ld2, ld3, ld4);
     end
     
     always @(ps) begin
-        {ld1, ld2, ld3, ld4, done} = 5'b0;
+        {ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4, mux1_sel, done,address,l1,l2,l3} = 15'b0;
         case (ps)
-            `IDLE        : ;
-            `LD1         : ;
-            `LD2         : ;
-            `LD3         : ;
-            `LD4         : ;
-            `MUL         : ;
-            `SUM1        : ;
-            `SUM2        : ;
-            `ACTIVE_FUNC : ;
-            `CHECK       : ;
-            `STORE       : ;
-            default      : ;
+            `IDLE        :{ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4, mux1_sel, done} = 15'b0;
+            `LD1         :{ld1, ldm1,mux1_sel,address} = 5'b11000;
+            `LD2         :{ld2, ldm2,mux1_sel,address} = 5'b11001 ;
+            `LD3         :{ld3, ldm3,mux1_sel,address} = 5'b11010  ;
+            `LD4         :{ld4, ldm4,mux1_sel,address} = 5'b11011 ;
+            `MUL         :{l1,l2,l3} = 3'b100;
+            `SUM1        :{l1,l2,l3} = 3'b010;
+            `SUM2        :{mux1_sel,l1,l2,l3} = 4'b1001;
+            `CHECK       :{ld1, ld2, ld3, ld4,mux1_sel} = 5'b11111;
+            `STORE       :{done}=1'b1 ;
+            default      :{ld1, ld2, ld3, ld4,ldm1, ldm2, ldm3, ldm4, mux1_sel, done,address,l1,l2,l3} = 15'b0;
         endcase
     end
 endmodule

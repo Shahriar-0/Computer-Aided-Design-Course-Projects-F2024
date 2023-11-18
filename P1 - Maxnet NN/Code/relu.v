@@ -1,7 +1,8 @@
 module relu  (
-    input wire [31:0] x,
+    input wire [31:0] B,
     output wire [31:0] y
 );
-    assign y = x[31] ? 32'b0 : x;
+    reg[31:0] zero = 32'h0;
+    assign y = B[31] ? zero : B;
 endmodule
 

@@ -1,17 +1,23 @@
-module mux4to1 (input [31:0] a,
-                b,
-                c,
-                d,
-                input [1:0] sel,
-                output reg [31:0] y);
-                
+module mux4to1 (
+    input [31:0] a,
+    b,
+    c,
+    d,
+    input [3:0] mux_sel,
+    input flag,
+    output reg [31:0] y
+);
     always @(*) begin
-        case (sel)
-            2'b00: y   = a;
-            2'b01: y   = b;
-            2'b10: y   = c;
-            2'b11: y   = d;
-            default: y = 4'bxxxx;
-        endcase
+        if (flag) begin
+            case (mux_sel)
+                4'b0001: y = a;
+                4'b0010: y = b;
+                4'b0100:  y = c;
+                4'b1000:  y = d;
+                default: y = 32'b x;
+            endcase
+        end
+        else
+            y = 32'b x;
     end
 endmodule

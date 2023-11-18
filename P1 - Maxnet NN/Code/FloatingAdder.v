@@ -2,9 +2,6 @@ module FloatingAddition #(parameter XLEN = 32)
                          (input [XLEN-1:0]A,
                           input [XLEN-1:0]B,
                           input clk,
-                          output overflow,
-                          output underflow,
-                          output exception,
                           output reg [XLEN-1:0] result);
     
     reg [23:0] MantisA,MantisB;
@@ -22,7 +19,7 @@ module FloatingAddition #(parameter XLEN = 32)
     reg [7:0] exp_adjust;
     
     always @(*) begin
-        comp = (A[30:23] > = B[30:23])? 1'b1 : 1'b0;
+        comp = (A[30:23] >= B[30:23]) ? 1'b1 : 1'b0;
         
         MantisA = comp ? {1'b1,A[22:0]} : {1'b1,B[22:0]};
         A_E     = comp ? A[30:23] : B[30:23];
@@ -52,7 +49,7 @@ module FloatingAddition #(parameter XLEN = 32)
         Sign      = signA;
         Mantissa  = MantisT[22:0];
         E         = exp_adjust;
-        result    = {Sign E, Mantissa};
+        result = {Sign, E, Mantissa};
         MantisT   = (signA ~^ signB) ? (carry ? MantisT>>1 : MantisT) : (0);
         Temp_E    = carry ? A_E + 1'b1 : A_E;
         Temp_sign = signA;

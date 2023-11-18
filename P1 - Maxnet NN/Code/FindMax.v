@@ -1,19 +1,18 @@
-`timescale 1ns / 1ps
 
-module findmaxout #(parameter XLEN = 32)
-                   (input s1,
-                    s2,
-                    s3,
-                    s4,
-                    output reg [1:0] findmax);
-    
-    always @(*)
-    begin
-        findmax                                   = 2'b00;
-        if (!s1 && (s2 || s3 || s4)) findmax      = 2'b01;
-        else if (!s2 && (s1 || s3 || s4)) findmax = 2'b10;
-        else if (!s3 && (s1 || s2 || s4)) findmax = 2'b11;
-        else if (!s4 && (s1 || s2 || s3)) findmax = 2'b100;
+module check_negatives (
+    input signed [31:0] in1, in2, in3, in4,
+    output reg [3:0] non_negatives,
+    output reg three_negatives
+);
+    integer  num_negatives;
+    always @(*) begin
+        non_negatives[0] = (in1 > 0);
+        non_negatives[1] = (in2 > 0);
+        non_negatives[2] = (in3 > 0);
+        non_negatives[3] = (in4 > 0);
+        
+        num_negatives = (in1 == 0) + (in2 == 0) + (in3 == 0) + (in4 == 0);
+        three_negatives = (num_negatives == 3);
     end
-    
 endmodule
+
