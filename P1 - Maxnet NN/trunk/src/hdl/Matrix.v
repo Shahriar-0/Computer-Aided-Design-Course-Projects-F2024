@@ -21,8 +21,8 @@ module Matrix #(parameter XLEN = 32)
     reg [XLEN - 1:0] matrix [0:15];
     
     initial begin
-        for (i = 0; i < = 3; i = i + 1) begin
-            for (j = 0; j < = 3; j = j + 1) begin
+        for (i = 0; i <= 3; i = i + 1) begin
+            for (j = 0; j <= 3; j = j + 1) begin
                 matrix[i * 4 + j] = (i == j)? 32'b00111111100000000000000000000000 : 32'b10111110010011001100110011001101; // 1:-.2
             end
         end
