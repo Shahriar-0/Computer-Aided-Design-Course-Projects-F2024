@@ -10,9 +10,6 @@ module ProcessingUnit #(parameter XLEN = 32)
                         weight4,
                         input clk,
                         rst,
-                        l1,
-                        l2,
-                        l3,
                         output [XLEN-1:0] result);
     
     wire [XLEN-1:0] mult1, mult2, mult3, mult4, R1Out, R2Out, R3Out, R4Out, add1, add2, add3;

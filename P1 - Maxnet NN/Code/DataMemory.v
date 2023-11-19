@@ -1,6 +1,5 @@
 module DataMemory (input clk,
                    rst,
-                   input [1:0] address,
                    output [3:0] readData [31:0]);
     
     reg [3:0] DM [31:0];
