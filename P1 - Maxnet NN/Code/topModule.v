@@ -1,4 +1,4 @@
-module topModule(input clk,
+module TopModule(input clk,
                  rst,
                  start,
                  output [31:0] maxnumber);

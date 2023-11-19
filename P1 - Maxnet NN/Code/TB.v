@@ -1,7 +1,10 @@
 `timescale 1ns / 1ns;
 
 module TestBench();
-    reg clk = 0, rst = 0,start;
+    reg clk, rst, start;
+    wire [31:0] maxnumber;
+
+    TopModule topModule(.clk(clk), .rst(rst), .start(start), .maxnumber(maxnumber));
 
     always #5 clk = ~clk;
     
