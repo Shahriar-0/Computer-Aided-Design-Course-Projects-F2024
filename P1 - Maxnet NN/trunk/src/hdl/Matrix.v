@@ -1,27 +1,27 @@
-module Matrix (output [31:0] W0,
-               W1,
-               W2,
-               W3,
-               W4,
-               W5,
-               W6,
-               W7,
-               W8,
-               W9,
-               W10,
-               W11,
-               W12,
-               W13,
-               W14,
-               W15);
+module Matrix(output [31:0] W0,
+              W1,
+              W2,
+              W3,
+              W4,
+              W5,
+              W6,
+              W7,
+              W8,
+              W9,
+              W10,
+              W11,
+              W12,
+              W13,
+              W14,
+              W15);
 
 integer i, j;
 
 reg [31:0] matrix [0:15];
 
 initial begin
-    for (i = 0; i <= 3; i = i + 1) begin
-        for (j = 0; j <= 3; j = j + 1) begin
+    for (i = 0; i < = 3; i = i + 1) begin
+        for (j = 0; j < = 3; j = j + 1) begin
             if (i == j) begin
                 // 1.0 in IEEE 754 format
                 matrix[i * 4 + j] = 32'b00111111100000000000000000000000;

@@ -4,7 +4,7 @@
 	exec vlib work
 	vmap work work
 	
-	set TB					"testbench"
+	set TB					"TestBench"
 	set hdl_path			"../src/hdl"
 	set inc_path			"../src/inc"
 	
@@ -15,16 +15,15 @@
 # Pleas add other module here	
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Check.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/CU.v
-	# vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.dat
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Decoder.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DP.v
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/FloatingAdder.v
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/FloatingMultiplier.v
+	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/FloatingAddition.v
+	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/FloatingMultiplication.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Matrix.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Mux2to1.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Mux4to1.v
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/PU.v
+	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/ProcessingUnit.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Register.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/ReLU.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/TopModule.v		

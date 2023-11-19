@@ -1,9 +1,9 @@
-module DataMemory (input clk,
-                   rst,
-                   output [31:0] readData1,
-                   readData2,
-                   readData3,
-                   readData4);
+module DataMemory(input clk,
+                 rst,
+                 output [31:0] readData1,
+                 readData2,
+                 readData3,
+                 readData4);
     
     reg [31:0] DM [3:0];
     

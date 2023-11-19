@@ -1,7 +1,7 @@
 module FloatingAddition #(parameter N = 32)
-              (input [N-1:0] a,
-               b,
-               output reg [N-1:0] result);
+                         (input [N-1:0] a,
+                          b,
+                          output reg [N-1:0] result);
     
     reg [23:0] aMantis, bMantis, tmpMantis;
     reg [22:0] resultMantis;
