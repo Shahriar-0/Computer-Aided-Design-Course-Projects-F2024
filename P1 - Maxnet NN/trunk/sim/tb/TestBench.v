@@ -15,7 +15,7 @@ module TestBench();
     #10 start = 1;
     #100 start = 0;
     wait(done == 1'b1)
-    #1000 $stop;
+    #1 $stop;
   end
 
   always @(posedge clk) begin

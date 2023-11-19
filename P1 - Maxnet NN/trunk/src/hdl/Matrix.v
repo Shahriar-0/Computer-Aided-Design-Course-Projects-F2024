@@ -20,8 +20,8 @@ integer i, j;
 reg [31:0] matrix [0:15];
 
 initial begin
-    for (i = 0; i < = 3; i = i + 1) begin
-        for (j = 0; j < = 3; j = j + 1) begin
+    for (i = 0; i <= 3; i = i + 1) begin
+        for (j = 0; j <= 3; j = j + 1) begin
             if (i == j) begin
                 // 1.0 in IEEE 754 format
                 matrix[i * 4 + j] = 32'b00111111100000000000000000000000;
