@@ -1,23 +1,15 @@
-`timescale 1ns/1ns;
+`timescale 1ns / 1ns;
 
 module TestBench();
-reg clk=0, rst=0,start;
-DP DP1 (clk,rst,start);
-    always #5 clk=~clk;
+    reg clk = 0, rst = 0,start;
 
-initial begin
-    clk=0;
-
+    always #5 clk = ~clk;
     
-    rst=1;
-
-    #5
-
-    start=1;
-    #5
-    rst=0;
-    #1500
-    $stop;
-
-end
+    initial begin
+        clk = 0; rst = 1;
+        #5 rst = 0;
+        #5 start = 1;
+        #5 start = 0;
+        #1500 $stop;
+    end
 endmodule
