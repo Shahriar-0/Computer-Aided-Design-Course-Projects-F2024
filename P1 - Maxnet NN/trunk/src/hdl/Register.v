@@ -1,14 +1,17 @@
-module Register(input clk,
-                input rst,
-                input ld,
-                input [31:0] in,
-                output reg [31:0] out);
+module Register #(parameter XLEN = 32)
+                 (input clk,
+                 input rst,
+                 input ld,
+                 input [XLEN - 1:0] in,
+                 output reg [XLEN - 1:0] out);
     
     always @(posedge clk or posedge rst) begin
-        if (rst)
+        if (rst) begin
             out <= 0;
-        else if (ld)
+        end
+        else if (ld) begin
             out <= in;
-            end
-        
-        endmodule
+        end
+    end
+            
+endmodule

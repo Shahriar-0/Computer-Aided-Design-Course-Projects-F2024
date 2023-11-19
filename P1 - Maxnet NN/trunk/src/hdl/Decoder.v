@@ -1,4 +1,9 @@
-module Decoder(input in1, in2, in3, in4, output reg [1:0] out);
+module Decoder(input in1,
+               in2,
+               in3,
+               in4,
+               output reg [1:0] out);
+
     always @(*) begin
         if (in1)
             out = 2'b00;
@@ -11,4 +16,5 @@ module Decoder(input in1, in2, in3, in4, output reg [1:0] out);
         else
             out = 2'b00;
     end
+    
 endmodule

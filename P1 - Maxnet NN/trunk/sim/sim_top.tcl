@@ -11,8 +11,8 @@
 	set run_time			"1 us"
 	# set run_time			"-all"
 
-#============================ Add verilog files  ===============================
-# Pleas add other module here	
+#============================   verilog files  ==================================
+
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Check.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/CU.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.v
@@ -34,9 +34,7 @@
 
 	vsim	-voptargs=+acc -debugDB $TB
 
-
 #======================= adding signals to wave window ==========================
-
 
 	add wave -hex -group 	 	{TB}				sim:/$TB/*
 	add wave -hex -group 	 	{top}				sim:/$TB/uut/*	
@@ -46,7 +44,6 @@
 	
 	configure wave -signalnamewidth 2
     
-
 #====================================== run =====================================
 
 	run $run_time 

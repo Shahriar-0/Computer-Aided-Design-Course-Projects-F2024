@@ -14,13 +14,6 @@ module CU(input clk,
     
     reg [2:0] ns, ps;
     
-    always @(posedge clk, posedge rst) begin
-        if (rst)
-            ps <= `IDLE;
-        else
-            ps <= ns;
-    end
-    
     always @(*) begin
         case (ps)
             `IDLE  : ns = (start)? `INIT: `IDLE;
@@ -39,4 +32,12 @@ module CU(input clk,
             `LD  : ldTmp                = 1'b1;
         endcase
     end
+    
+    always @(posedge clk, posedge rst) begin
+        if (rst)
+            ps <= `IDLE;
+        else
+            ps <= ns;
+    end
+    
 endmodule

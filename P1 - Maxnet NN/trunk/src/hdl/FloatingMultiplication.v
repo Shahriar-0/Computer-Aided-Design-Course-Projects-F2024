@@ -1,7 +1,7 @@
-module FloatingMultiplication #(parameter N = 32)
-                               (input [N-1:0] a,
+module FloatingMultiplication #(parameter XLEN = 32)
+                               (input [XLEN - 1:0] a,
                                 b,
-                                output reg [N-1:0] result);
+                                output reg [XLEN - 1:0] result);
     
     reg [47:0] tempMantis;
     reg [23:0] aMantis, bMantis;
@@ -10,20 +10,19 @@ module FloatingMultiplication #(parameter N = 32)
     reg aSign, bSign, resultSign;
     
     always @(*) begin
-        aMantis = {1'b1,a[22:0]};
+        aMantis = {1'b1, a[22:0]};
         aExp    = a[30:23];
         aSign   = a[31];
         
-        bMantis = {1'b1,b[22:0]};
+        bMantis = {1'b1, b[22:0]};
         bExp    = b[30:23];
         bSign   = b[31];
         
         tmpExp     = aExp + bExp - 127;
         tempMantis = aMantis * bMantis;
         
-        resultMantis = tempMantis[47] ? tempMantis[46:24] : tempMantis[45:23];
         resultExp    = tempMantis[47] ? tmpExp + 1'b1 : tmpExp;
-        
+        resultMantis = tempMantis[47] ? tempMantis[46:24] : tempMantis[45:23];
         resultSign = aSign ^ bSign;
         
         result = (a == 32'b0 || b == 32'b0) ? 0 : {resultSign, resultExp, resultMantis};
