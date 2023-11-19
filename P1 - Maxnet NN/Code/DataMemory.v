@@ -1,21 +1,23 @@
-module DataMemory (input clk,rst,
+module DataMemory (input clk,
+                   rst,
                    input [1:0] address,
-                   output [31:0] read_data);
+                   output [3:0] readData [31:0]);
     
-    reg [31:0] data_mem [3:0];
+    reg [31:0] DM [3:0];
     
     initial begin
-        $readmemh("DataMemory.txt", data_mem);
+        $readmemh("DataMemory.txt", DM);
     end
-    
-    assign read_data = data_mem[address];
     
     always @(posedge clk, posedge rst) begin
-        if (rst)
-            $readmemh("DataMemory.txt", data_mem);
+        if (rst) begin
+            $readmemh("DataMemory.txt", DM);
+        end
     end
     
-    
+    assign readData[0] = DM[2'b00];
+    assign readData[1] = DM[2'b01];
+    assign readData[2] = DM[2'b10];
+    assign readData[3] = DM[2'b11];
 
-        
-        endmodule
+endmodule
