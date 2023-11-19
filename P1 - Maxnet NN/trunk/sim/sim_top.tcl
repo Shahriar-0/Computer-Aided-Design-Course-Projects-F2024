@@ -15,7 +15,7 @@
 # Pleas add other module here	
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Check.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/CU.v
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.dat
+	# vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.dat
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DataMemory.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/Decoder.v
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/DP.v
