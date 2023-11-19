@@ -1,13 +1,9 @@
-module Mux2bit (input [31:0] a,
+module Mux2to1 (input [31:0] a,
                 b,
                 input sel,
-                output reg [31:0] out);
+                output [31:0] out);
 
-always @(*) begin
-    if (sel)
-        out = b;
-    else
-        out = a;
-end
+
+    assign out = (~sel)? a : b;
 
 endmodule
