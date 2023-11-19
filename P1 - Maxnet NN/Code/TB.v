@@ -9,9 +9,8 @@ module TestBench();
     always #5 clk = ~clk;
     
     initial begin
-        clk = 0; rst = 1;
+        clk = 0; rst = 1; start = 1;
         #5 rst = 0;
-        #5 start = 1;
         #5 start = 0;
         #1500 $stop;
     end

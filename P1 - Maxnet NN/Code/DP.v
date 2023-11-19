@@ -10,6 +10,7 @@ module DP(input clk,
     wire [1:0] decoderOut;
     wire [31:0] relu1Out, relu2Out, relu3Out, relu4Out;
     wire [31:0] mux1Out, mux2Out, mux3Out, mux4Out;
+    wire [31:0] x1Out, x2Out, x3Out, x4Out;
     wire [31:0] val1Out, val2Out, val3Out, val4Out;
     wire val1OutOr, val2OutOr, val3OutOr, val4OutOr;
     wire [31:0] w11, w12, w13, w14;
