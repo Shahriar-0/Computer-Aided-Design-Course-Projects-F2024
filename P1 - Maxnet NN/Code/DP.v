@@ -36,10 +36,10 @@ module DP(input clk,
     Mux4to1 outputMux(.a(x1Out), .b(x2Out), .c(x3Out), .d(x4Out), .sel(decoderOut), .out(maxnumber));
     
     // this part for recording value of x1, x2, x3, x4 as the model trains
-    Mux2to1 mux1(.a(readData1), .b(relu1Out), .sel(selTmp), .out(mux1Out));
-    Mux2to1 mux2(.a(readData2), .b(relu2Out), .sel(selTmp), .out(mux2Out));
-    Mux2to1 mux3(.a(readData3), .b(relu3Out), .sel(selTmp), .out(mux3Out));
-    Mux2to1 mux4(.a(readData4), .b(relu4Out), .sel(selTmp), .out(mux4Out));
+    Mux2to1 mux1(.a(readData1), .b(relu1Out), .sel(~selTmp), .out(mux1Out));
+    Mux2to1 mux2(.a(readData2), .b(relu2Out), .sel(~selTmp), .out(mux2Out));
+    Mux2to1 mux3(.a(readData3), .b(relu3Out), .sel(~selTmp), .out(mux3Out));
+    Mux2to1 mux4(.a(readData4), .b(relu4Out), .sel(~selTmp), .out(mux4Out));
     
     Register tmp1(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux1Out), .out(val1));
     Register tmp2(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux2Out), .out(val2));
