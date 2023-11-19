@@ -12,5 +12,6 @@ always @(*) begin
         2'b10  : out = c;
         2'b11  : out = d;
         default: out = 32'bx;
-    end
+    endcase
+end
 endmodule
