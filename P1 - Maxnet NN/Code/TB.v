@@ -1,10 +1,10 @@
 `timescale 1ns / 1ns;
 
 module TestBench();
-    reg clk, rst, start;
+    reg clk, rst, start, done;
     wire [31:0] maxnumber;
 
-    TopModule topModule(.clk(clk), .rst(rst), .start(start), .maxnumber(maxnumber));
+    TopModule topModule(.clk(clk), .rst(rst), .start(start), .maxnumber(maxnumber), .done(done));
 
     always #5 clk = ~clk;
     
@@ -13,6 +13,7 @@ module TestBench();
     #10 rst = 0;
     #10 start = 1;
     #100 start = 0;
+    wait(done == 1'b1)
     #1000 $stop;
   end
 
