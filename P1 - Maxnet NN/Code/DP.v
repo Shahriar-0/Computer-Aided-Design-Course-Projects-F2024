@@ -6,7 +6,7 @@ module DP(input clk,
           output done,
           output [31:0] maxnumber);
     
-    wire [3:0] readData [31:0];
+    wire [31:0] readData1, readData2, readData3, readData4;
     wire [1:0] decoderOut;
     wire [31:0] relu1Out, relu2Out, relu3Out, relu4Out;
     wire [31:0] mux1Out, mux2Out, mux3Out, mux4Out;
@@ -18,23 +18,27 @@ module DP(input clk,
     wire [31:0] w41, w42, w43, w44;
     wire [31:0] PU1Out, PU2Out, PU3Out, PU4Out;
     
-    DataMemory DM(.clk(clk), .rst(rst), .readData(readData));
+    DataMemory DM(
+        .clk(clk), .rst(rst), 
+        .readData1(readData1), .readData2(readData2), 
+        .readData3(readData3), .readData4(readData4)
+    );
 
     
     
     // this part is for showing the maximum number
-    Register x1(.clk(clk), .rst(rst), .ld(ldX), .in(readData[0]), .out(x1Out));
-    Register x2(.clk(clk), .rst(rst), .ld(ldX), .in(readData[1]), .out(x2Out));
-    Register x3(.clk(clk), .rst(rst), .ld(ldX), .in(readData[2]), .out(x3Out));
-    Register x4(.clk(clk), .rst(rst), .ld(ldX), .in(readData[3]), .out(x4Out));
+    Register x1(.clk(clk), .rst(rst), .ld(ldX), .in(readData1), .out(x1Out));
+    Register x2(.clk(clk), .rst(rst), .ld(ldX), .in(readData2), .out(x2Out));
+    Register x3(.clk(clk), .rst(rst), .ld(ldX), .in(readData3), .out(x3Out));
+    Register x4(.clk(clk), .rst(rst), .ld(ldX), .in(readData4), .out(x4Out));
     Decoder decoder(.in1(val1OutOr), .in2(val2OutOr), .in3(val3OutOr), .in4(val4OutOr), .out(decoderOut));
     Mux4to1 outputMux(.a(x1Out), .b(x2Out), .c(x3Out), .d(x4Out), .sel(decoderOut), .out(maxnumber));
     
     // this part for recording value of x1, x2, x3, x4 as the model trains
-    Mux2to1 mux1(.a(readData[0]), .b(relu1Out), .sel(selTmp), .out(mux1Out));
-    Mux2to1 mux2(.a(readData[1]), .b(relu2Out), .sel(selTmp), .out(mux2Out));
-    Mux2to1 mux3(.a(readData[2]), .b(relu3Out), .sel(selTmp), .out(mux3Out));
-    Mux2to1 mux4(.a(readData[3]), .b(relu4Out), .sel(selTmp), .out(mux4Out));
+    Mux2to1 mux1(.a(readData1), .b(relu1Out), .sel(selTmp), .out(mux1Out));
+    Mux2to1 mux2(.a(readData2), .b(relu2Out), .sel(selTmp), .out(mux2Out));
+    Mux2to1 mux3(.a(readData3), .b(relu3Out), .sel(selTmp), .out(mux3Out));
+    Mux2to1 mux4(.a(readData4), .b(relu4Out), .sel(selTmp), .out(mux4Out));
     
     Register tmp1(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux1Out), .out(val1Out));
     Register tmp2(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux2Out), .out(val2Out));

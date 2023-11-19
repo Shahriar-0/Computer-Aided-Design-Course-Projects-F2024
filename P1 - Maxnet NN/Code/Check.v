@@ -1,9 +1,9 @@
 
-module Check(input signed [31:0] in1,
+module Check(input in1,
              in2,
              in3,
              in4,
-             output reg out);
+             output out);
 
 wire w1, w2, w3, w4, w5;
 assign w1  = in1 & ~in2 & ~in3 & ~in4;
