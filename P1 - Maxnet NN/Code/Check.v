@@ -1,9 +1,9 @@
 
-module check_negatives (input signed [31:0] in1,
-                        in2,
-                        in3,
-                        in4,
-                        output reg out);
+module Check(input signed [31:0] in1,
+             in2,
+             in3,
+             in4,
+             output reg out);
 
 wire w1, w2, w3, w4, w5;
 assign w1  = in1 & ~in2 & ~in3 & ~in4;
