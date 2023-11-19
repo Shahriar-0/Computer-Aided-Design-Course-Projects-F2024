@@ -24,11 +24,11 @@ initial begin
         for (j = 0; j < = 3; j = j + 1) begin
             if (i == j) begin
                 // 1.0 in IEEE 754 format
-                buffer[i*4+j] = 32'b00111111100000000000000000000000;
+                buffer[i * 4 + j] = 32'b00111111100000000000000000000000;
             end
             else begin
                 // -0.2 in IEEE 754 format
-                buffer[i*4+j] = 32'b10111110010011001100110011001101;
+                buffer[i * 4 + j] = 32'b10111110010011001100110011001101;
             end
         end
     end

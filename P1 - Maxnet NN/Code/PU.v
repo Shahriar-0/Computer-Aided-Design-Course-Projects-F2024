@@ -29,7 +29,7 @@ module ProcessingUnit #(parameter XLEN = 32)
     
     FloatingAddition #(XLEN) addInst1(.a(R1Out), .b(R2Out), .result(add1));
     FloatingAddition #(XLEN) addInst2(.a(R3Out), .b(R3Out), .result(add2));
-    FloatingAddition #(XLEN) addInst3(.a(add1), .b(add2),  .result(add3));
+    FloatingAddition #(XLEN) addInst3(.a(add1), .b(add2),   .result(add3));
     
     Register R5(.clk(clk), .rst(rst), .in(add3), .out(result), .ld(1'b1));
 
