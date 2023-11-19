@@ -9,9 +9,16 @@ module TestBench();
     always #5 clk = ~clk;
     
     initial begin
-        clk = 0; rst = 1; start = 1;
-        #5 rst = 0;
-        #5 start = 0;
-        #1500 $stop;
-    end
+    clk = 0; rst = 1; start = 0;
+    #10 rst = 0;
+    #10 start = 1;
+    #100 start = 0;
+    wait(done == 1'b1)
+    #1 $stop;
+  end
+
+  always @(posedge clk) begin
+    $display("Time=%0t rst=%b start=%b maximum_number=%h", $time, rst, start, maximum_number);
+  end
+
 endmodule

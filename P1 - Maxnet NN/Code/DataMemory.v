@@ -8,12 +8,12 @@ module DataMemory (input clk,
     reg [3:0] DM [31:0];
     
     initial begin
-        $readmemh("DataMemory.txt", DM);
+        $readmemh("DataMemory.dat", DM);
     end
     
     always @(posedge clk, posedge rst) begin
         if (rst) begin
-            $readmemh("DataMemory.txt", DM);
+            $readmemh("DataMemory.dat", DM);
         end
     end
     
