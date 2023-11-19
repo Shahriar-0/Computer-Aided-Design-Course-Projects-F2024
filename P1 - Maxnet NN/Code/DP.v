@@ -1,49 +1,12 @@
 module DP(input clk,
           rst,
-          start);
-    
-    wire [31:0] dmout;
-    wire [1:0] address;
-    wire [31:0] M1Out, M2Out, M3Out, M4Out;
-    wire [31:0] R1Out, R2Out, R3Out, R4Out;
-    wire [31:0] end1, end2, end3, end4; //for the output reg
-    wire [31:0] PUOut, PU2Out, PU3Out, PU4Out;
-    wire [31:0] AOut, A2Out, A3Out, A4Out;
-    wire [3:0] mux_sel;
-    wire end_case ;
-    wire ld1, ld2, ld3, ld4;
-    wire done;
-    wire Selectm;
-    wire ldm1, ldm2, ldm3, ldm4;
-    wire lp1,lp2,lp3;
+          ldX,
+          ldTmp,
+          selTmp,
+          output done,
+          output [31:0] maxnumber);
     
     
-    wire [31:0] maxnumber;
-    
-    
-    reg [31:0] w [0:3][0:3];
-    integer i;
-    integer j;
-    
-    initial begin
-        for (i = 0; i < 4; i = i + 1) begin
-            for (j = 0; j < 4; j = j + 1) begin
-                if (i == j) begin
-                    w[i][j] = 32'b00111111100000000000000000000000;
-                end
-                else begin
-                    w[i][j] = 32'b10111110010011001100110011001101;  // Replace with your epsilon value
-                end
-            end
-        end
-    end
-    
-    CU cntrl(
-    .clk(clk), .rst(rst), .start(start), .done(done), .flag(end_case),
-    .ld1(ld1), .ld2(ld2), .ld3(ld3), .ld4(ld4), .mux1_sel(Selectm),
-    .ldm1(ldm1), .ldm2(ldm2), .ldm3(ldm3), .ldm4(ldm4),
-    .address(address), .l1(lp1), .l2(lp2), .l3(lp3)
-    );
     
     
     //in contorroler increment addres by one and then put it in the register by l1
