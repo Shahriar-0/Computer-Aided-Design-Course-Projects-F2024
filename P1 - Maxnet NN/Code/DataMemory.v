@@ -5,7 +5,7 @@ module DataMemory (input clk,
                    readData3,
                    readData4);
     
-    reg [3:0] DM [31:0];
+    reg [31:0] DM [3:0];
     
     initial begin
         $readmemh("DataMemory.dat", DM);

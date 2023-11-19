@@ -13,12 +13,11 @@ module TestBench();
     #10 rst = 0;
     #10 start = 1;
     #100 start = 0;
-    wait(done == 1'b1)
-    #1 $stop;
+    #1000 $stop;
   end
 
   always @(posedge clk) begin
-    $display("Time=%0t rst=%b start=%b maximum_number=%h", $time, rst, start, maximum_number);
+    $display("Time=%0t rst=%b start=%b maximum_number=%h", $time, rst, start, maxnumber);
   end
 
 endmodule
