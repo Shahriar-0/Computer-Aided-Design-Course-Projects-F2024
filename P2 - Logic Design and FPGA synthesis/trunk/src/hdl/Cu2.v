@@ -22,11 +22,11 @@ module CU(input clk,
     ZeroExtend1to3 Z1(.in(top_left_mux_out),.out(top_left_mux_out_extend));
 
 
-    MUX22bit middle_left_mux(.A(2'b1),.B(2'b2),.select(start),.out(middle_left_mux_out));
+    MUX22bit middle_left_mux(.A(2'b10),.B(2'b10),.select(start),.out(middle_left_mux_out));
     ZeroExtend2to3 Z2(.in(middle_left_mux_out),.out(middle_left_mux_out_extend));
 
 
-    MUX22bit low_left_mux(.A(2'b0),.B(2'b2),.select(done),.out(low_left_mux_out));
+    MUX22bit low_left_mux(.A(2'b0),.B(2'b10),.select(done),.out(low_left_mux_out));
     ZeroExtend2to3 Z2(.in(low_left_mux_out),.out(low_left_mux_out_extend));
 
     MUX8REG3bit mux8(
@@ -35,8 +35,8 @@ module CU(input clk,
     .select(ps)
     .A(top_left_mux_out_extend),
     .B(middle_left_mux_out_extend),
-    .C(3'b3),      /// ithink about it u thick too
-    .D(3'b4),
+    .C(3'b011),      /// ithink about it u thick too
+    .D(3'b100),
     .E(low_left_mux_out_extend),
     .F(3'b0),
     .G(3'b0),
@@ -56,9 +56,9 @@ module CU(input clk,
     .H(1'b0),
     .out(ldTmp));
 
-    ThreeBitComparator TBC(.A(ps),.B(3'b1),.Equal(s1));
+    ThreeBitComparator TBC(.A(ps),.B(3'b011),.Equal(s1));
     MUX2 mux_right_up (.A(1'b0),.B(1'b1),.select(s1),.out(selTmp));
-    ThreeBitComparator TBC(.A(ps),.B(3'b1),.Equal(s2));
+    ThreeBitComparator TBC(.A(ps),.B(3'b011),.Equal(s2));
     MUX2 mux_right_middle (.A(1'b0),.B(1'b1),.select(s2),.out(ldX));
 
 
