@@ -2,7 +2,7 @@ module MUX4REG3bit #(parameter bits = 3) (
     input clock, reset,
     input [bits - 1 : 0] A, B, C, D,
     input [1:0] select,
-    output reg [bits - 1 : 0] out
+    output [bits - 1 : 0] out
 );
 
 genvar i;
@@ -11,7 +11,7 @@ generate
         _ACT_S2 #(1) mux4reg(
             .clock(clock), 
             .reset(reset),
-            .D00(A[i]), 
+            .D00(A[i]),
             .D01(B[i]), 
             .D10(C[i]), 
             .D11(D[i]), 
@@ -22,6 +22,7 @@ generate
             .out(out[i])
         );
     end
+    // _ACT_S2
 endgenerate
 
 endmodule

@@ -37,13 +37,6 @@ module MULT #(parameter N) (
             assign yv[0][i] = y[i];
             assign z[i] = pv[i + 1][0];
             assign z[i + N] = pv[N][i + 1];
-            // BUF buf_1(x[i], xv[i][0]);
-            // BUF buf_2(y[i], yv[0][i]);
-            // BUF buf_3(1'b0, cv[i][0]);
-            // BUF buf_4(1'b0, pv[0][i + 1]);
-            // BUF buf_5(cv[i][N], pv[i + 1][N]);
-            // BUF buf_6(pv[N][i + 1], z[i + N]);
-            // BUF buf_7(pv[i + 1][0], z[i]);
         end
     endgenerate
 

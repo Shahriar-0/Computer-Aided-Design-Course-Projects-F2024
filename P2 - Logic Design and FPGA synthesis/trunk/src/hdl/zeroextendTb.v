@@ -24,7 +24,7 @@ module ZeroExtend2to3_tb;
         #10 in = 2'b10; $display("%g\t%b\t%b", $time, in, out);
         #10 in = 2'b11; $display("%g\t%b\t%b", $time, in, out);
 
-        #10 $finish;
+        #10 $stop;
     end
       
 endmodule

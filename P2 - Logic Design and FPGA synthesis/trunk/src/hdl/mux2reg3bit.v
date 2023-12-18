@@ -15,7 +15,7 @@ module MUX2REG3bit #(parameter bits = 3) (
                 .in1(B[i]), 
                 .out(out[i]), 
                 .enable(enable), 
-                .select(select), 
+                .select(select)
             );
         end
     endgenerate

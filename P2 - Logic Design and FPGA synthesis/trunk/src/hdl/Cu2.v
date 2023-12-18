@@ -27,12 +27,12 @@ module CU(input clk,
 
 
     MUX22bit low_left_mux(.A(2'b0),.B(2'b10),.select(done),.out(low_left_mux_out));
-    ZeroExtend2to3 Z2(.in(low_left_mux_out),.out(low_left_mux_out_extend));
+    ZeroExtend2to3 Z3(.in(low_left_mux_out),.out(low_left_mux_out_extend));
 
     MUX8REG3bit mux8(
     .clock(clk),
     .reset(rst),
-    .select(ps)
+    .select(ps),
     .A(top_left_mux_out_extend),
     .B(middle_left_mux_out_extend),
     .C(3'b011),      /// ithink about it u thick too
@@ -58,7 +58,7 @@ module CU(input clk,
 
     ThreeBitComparator TBC(.A(ps),.B(3'b011),.Equal(s1));
     MUX2 mux_right_up (.A(1'b0),.B(1'b1),.select(s1),.out(selTmp));
-    ThreeBitComparator TBC(.A(ps),.B(3'b011),.Equal(s2));
+    ThreeBitComparator TBC2(.A(ps),.B(3'b011),.Equal(s2));
     MUX2 mux_right_middle (.A(1'b0),.B(1'b1),.select(s2),.out(ldX));
 
 
