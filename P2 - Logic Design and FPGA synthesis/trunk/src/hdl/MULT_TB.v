@@ -1,16 +1,16 @@
 `timescale 1ns/1ns
 
-module TB_add();
+module MULT_TB();
     
     reg [9:0] a, b;
-    reg cin;
-    wire [10:0] s;
-    AdderCascade #(10) adrcsc(a, b, cin, s);
+    wire [19:0] s;
+    MULT #(10) mult(a, b, s);
 
     always begin
         #10
         a = $random;
         b = $random;
-        cin = $random;
     end 
+
+    initial #100 $stop;
 endmodule

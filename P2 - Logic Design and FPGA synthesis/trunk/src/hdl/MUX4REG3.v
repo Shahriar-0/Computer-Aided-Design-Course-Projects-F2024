@@ -1,4 +1,4 @@
-module MUX4REG3bit #(parameter bits = 3) ( 
+module MUX4REG3 #(parameter bits = 3) ( 
     input clock, reset,
     input [bits - 1 : 0] A, B, C, D,
     input [1:0] select,
@@ -8,7 +8,7 @@ module MUX4REG3bit #(parameter bits = 3) (
 genvar i;
 generate
     for (i = 0; i < bits; i = i + 1) begin: mux_cascade
-        _ACT_S2 #(1) mux4reg(
+        __ACT_S2 #(1) mux4reg(
             .clock(clock), 
             .reset(reset),
             .D00(A[i]),
@@ -22,7 +22,7 @@ generate
             .out(out[i])
         );
     end
-    // _ACT_S2
+    // __ACT_S2
 endgenerate
 
 endmodule

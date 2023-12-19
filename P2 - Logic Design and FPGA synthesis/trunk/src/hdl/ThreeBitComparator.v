@@ -1,7 +1,7 @@
 module ThreeBitComparator(
-    input [2:0] A, // 3-bit input A
-    input [2:0] B, // 3-bit input B
-    output Equal // Output to indicate A equals B
+    input [2:0] A,
+    input [2:0] B,
+    output Equal 
 );
 wire d1,d2,d3;
 wire equals;

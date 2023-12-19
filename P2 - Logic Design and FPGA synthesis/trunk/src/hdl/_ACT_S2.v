@@ -1,4 +1,4 @@
-module _ACT_S2 #(parameter bits = 2) (
+module __ACT_S2 #(parameter bits = 2) (
     input clock, reset,
     input [bits - 1 : 0] D00, D01, D10, D11,
     input A1, B1, A0, B0,

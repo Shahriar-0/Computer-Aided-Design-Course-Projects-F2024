@@ -1,4 +1,4 @@
-module _ACT_C1 (
+module __ACT_C1 (
     input A0, A1, SA, B0, B1, SB, S0, S1,
 
     output out

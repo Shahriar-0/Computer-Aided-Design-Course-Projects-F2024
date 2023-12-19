@@ -18,18 +18,18 @@ module CU(input clk,
     wire [2:0]ns,ps; 
     wire s1,s2;   
 
-    MUX2 top_left_mux(.A(1'b0),.B(1'b1),.select(start),.out(top_left_mux_out));
+    MUX2Single top_left_mux(.A(1'b0),.B(1'b1),.select(start),.out(top_left_mux_out));
     ZeroExtend1to3 Z1(.in(top_left_mux_out),.out(top_left_mux_out_extend));
 
 
-    MUX22bit middle_left_mux(.A(2'b10),.B(2'b10),.select(start),.out(middle_left_mux_out));
+    MUX2 middle_left_mux(.A(2'b10),.B(2'b10),.select(start),.out(middle_left_mux_out));
     ZeroExtend2to3 Z2(.in(middle_left_mux_out),.out(middle_left_mux_out_extend));
 
 
-    MUX22bit low_left_mux(.A(2'b0),.B(2'b10),.select(done),.out(low_left_mux_out));
+    MUX2 low_left_mux(.A(2'b0),.B(2'b10),.select(done),.out(low_left_mux_out));
     ZeroExtend2to3 Z3(.in(low_left_mux_out),.out(low_left_mux_out_extend));
 
-    MUX8REG3bit mux8(
+    MUX8REG mux8(
     .clock(clk),
     .reset(rst),
     .select(ps),
@@ -57,9 +57,9 @@ module CU(input clk,
     .out(ldTmp));
 
     ThreeBitComparator TBC(.A(ps),.B(3'b011),.Equal(s1));
-    MUX2 mux_right_up (.A(1'b0),.B(1'b1),.select(s1),.out(selTmp));
+    MUX2Single mux_right_up (.A(1'b0),.B(1'b1),.select(s1),.out(selTmp));
     ThreeBitComparator TBC2(.A(ps),.B(3'b011),.Equal(s2));
-    MUX2 mux_right_middle (.A(1'b0),.B(1'b1),.select(s2),.out(ldX));
+    MUX2Single mux_right_middle (.A(1'b0),.B(1'b1),.select(s2),.out(ldX));
 
 
 endmodule

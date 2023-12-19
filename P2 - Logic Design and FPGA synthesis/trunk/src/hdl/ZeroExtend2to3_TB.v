@@ -1,10 +1,9 @@
 `timescale 1ns / 1ps
 
-module ZeroExtend2to3_tb;
+module ZeroExtend2to3_TB;
 
     reg [1:0] in;
 
-    // Outputs
     wire [2:0] out;
 
     ZeroExtend2to3 uut (
@@ -13,7 +12,6 @@ module ZeroExtend2to3_tb;
     );
 
     initial begin
-        // Initialize Inputs
         in = 0;
 
         #100;

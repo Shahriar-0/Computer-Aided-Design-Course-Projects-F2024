@@ -18,7 +18,7 @@ module MUX8 #(parameter bits = 1) (
         .out(mux4_out_1)
     );
     
-    MUX2 #(bits) final_mux4 (
+    MUX2Single #(bits) final_mux4 (
         .A(mux4_out_0), .B(mux4_out_1),
         .select({1'b0, select[2]}),  
         .out(out)

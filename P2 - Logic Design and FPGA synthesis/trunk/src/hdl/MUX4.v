@@ -10,6 +10,6 @@ module MUX4 #(parameter bits = 1) (
     //  10 -> C
     //  11 -> D
     
-    _ACT_C2 #(bits) mux4(A, B, C, D, select[1], 0, select[0], 1, out);
+    __ACT_C2 #(bits) mux4(A, B, C, D, select[1], 0, select[0], 1, out);
 
 endmodule

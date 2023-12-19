@@ -1,4 +1,4 @@
-module _ACT_C2 #(parameter bits = 2) (
+module __ACT_C2 #(parameter bits = 2) (
     input [bits - 1 : 0] D00, D01, D10, D11,
     input A1, B1, A0, B0,
 
