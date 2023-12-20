@@ -1,4 +1,4 @@
-module __ACT_C2 #(parameter XLEN = 2) (
+module __ACT_C2 #(parameter XLEN = 1) (
     input [XLEN - 1 : 0] D00, D01, D10, D11,
     input A1, B1, A0, B0,
 

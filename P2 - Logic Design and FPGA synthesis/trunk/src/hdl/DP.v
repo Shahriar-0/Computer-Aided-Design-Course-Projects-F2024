@@ -1,4 +1,4 @@
-module DP #(parameter XLEN = 32) (
+module DP #(parameter XLEN = 5) (
     input clk, rst, ldX, ldTmp, selTmp,
 
     output done,
@@ -28,13 +28,13 @@ module DP #(parameter XLEN = 32) (
     
     
     // showing the maximum number
-    Register x1(.clk(clk), .rst(rst), .ld(ldX), .in(readData1), .out(x1Out));
-    Register x2(.clk(clk), .rst(rst), .ld(ldX), .in(readData2), .out(x2Out));
-    Register x3(.clk(clk), .rst(rst), .ld(ldX), .in(readData3), .out(x3Out));
-    Register x4(.clk(clk), .rst(rst), .ld(ldX), .in(readData4), .out(x4Out));
+    REG #(XLEN) x1(.clk(clk), .rst(rst), .ld(ldX), .in(readData1), .out(x1Out));
+    REG #(XLEN) x2(.clk(clk), .rst(rst), .ld(ldX), .in(readData2), .out(x2Out));
+    REG #(XLEN) x3(.clk(clk), .rst(rst), .ld(ldX), .in(readData3), .out(x3Out));
+    REG #(XLEN) x4(.clk(clk), .rst(rst), .ld(ldX), .in(readData4), .out(x4Out));
     
     Decoder decoder(.in1(val1Or), .in2(val2Or), .in3(val3Or), .in4(val4Or), .out(decoderOut));
-    Mux4to1 outputMux(.a(x1Out), .b(x2Out), .c(x3Out), .d(x4Out), .sel(decoderOut), .out(maxnumber));
+    MUX4 #(XLEN) outputMux(.a(x1Out), .b(x2Out), .c(x3Out), .d(x4Out), .sel(decoderOut), .out(maxnumber));
     
     
     // checking if we found the maximum number
@@ -47,47 +47,47 @@ module DP #(parameter XLEN = 32) (
     
     
     //recording value of x1, x2, x3, x4 as the model trains
-    Mux2to1 mux1(.a(readData1), .b(relu1Out), .sel(~selTmp), .out(mux1Out));
-    Mux2to1 mux2(.a(readData2), .b(relu2Out), .sel(~selTmp), .out(mux2Out));
-    Mux2to1 mux3(.a(readData3), .b(relu3Out), .sel(~selTmp), .out(mux3Out));
-    Mux2to1 mux4(.a(readData4), .b(relu4Out), .sel(~selTmp), .out(mux4Out));
+    MUX2 #(XLEN) mux1(.a(readData1), .b(relu1Out), .sel(~selTmp), .out(mux1Out));
+    MUX2 #(XLEN) mux2(.a(readData2), .b(relu2Out), .sel(~selTmp), .out(mux2Out));
+    MUX2 #(XLEN) mux3(.a(readData3), .b(relu3Out), .sel(~selTmp), .out(mux3Out));
+    MUX2 #(XLEN) mux4(.a(readData4), .b(relu4Out), .sel(~selTmp), .out(mux4Out));
     
-    Register tmp1(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux1Out), .out(val1));
-    Register tmp2(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux2Out), .out(val2));
-    Register tmp3(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux3Out), .out(val3));
-    Register tmp4(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux4Out), .out(val4));
+    REG #(XLEN) tmp1(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux1Out), .out(val1));
+    REG #(XLEN) tmp2(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux2Out), .out(val2));
+    REG #(XLEN) tmp3(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux3Out), .out(val3));
+    REG #(XLEN) tmp4(.clk(clk), .rst(rst), .ld(ldTmp), .in(mux4Out), .out(val4));
     
     
-    // pu and relu
-    Matrix matrix(
-    .W0(w11),  .W1(w12),  .W2(w13),  .W3(w14),
-    .W4(w21),  .W5(w22),  .W6(w23),  .W7(w24),
-    .W8(w31),  .W9(w32),  .W10(w33), .W11(w34),
-    .W12(w41), .W13(w42), .W14(w43), .W15(w44)
+    // processing unit 1
+    PU1 #(XLEN) pu1(
+    .clk(clk), .rst(rst), 
+    .num1(val1), .num2(val2), 
+    .num3(val3), .num4(val4), 
+    .result(PU1Out)
     );
-    
-    ProcessingUnit p1(
-    .clk(clk),     .rst(rst),     .result(PU1Out),
-    .num1(val1),   .num2(val2),   .num3(val3),   .num4(val4),
-    .weight1(w11), .weight2(w12), .weight3(w13), .weight4(w14)
+
+    // processing unit 2
+    PU2 #(XLEN) pu2(
+    .clk(clk), .rst(rst),
+    .num1(val1), .num2(val2),
+    .num3(val3), .num4(val4),
+    .result(PU2Out)
     );
-    
-    ProcessingUnit p2(
-    .clk(clk),     .rst(rst),     .result(PU2Out),
-    .num1(val1),   .num2(val2),   .num3(val3),   .num4(val4),
-    .weight1(w21), .weight2(w22), .weight3(w23), .weight4(w24)
+
+    // processing unit 3
+    PU3 #(XLEN) pu3(
+    .clk(clk), .rst(rst),
+    .num1(val1), .num2(val2),
+    .num3(val3), .num4(val4),
+    .result(PU3Out)
     );
-    
-    ProcessingUnit p3(
-    .clk(clk),     .rst(rst),     .result(PU3Out),
-    .num1(val1),   .num2(val2),   .num3(val3),   .num4(val4),
-    .weight1(w31), .weight2(w32), .weight3(w33), .weight4(w34)
-    );
-    
-    ProcessingUnit p4(
-    .clk(clk),     .rst(rst),     .result(PU4Out),
-    .num1(val1),   .num2(val2),   .num3(val3),   .num4(val4),
-    .weight1(w41), .weight2(w42), .weight3(w43), .weight4(w44)
+
+    // processing unit 4
+    PU4 #(XLEN) pu4(
+    .clk(clk), .rst(rst),
+    .num1(val1), .num2(val2),
+    .num3(val3), .num4(val4),
+    .result(PU4Out)
     );
     
     ReLU relu1(.in(PU1Out), .out(relu1Out));
