@@ -1,9 +1,9 @@
 
-module Check(input in1,
-             in2,
-             in3,
-             in4,
-             output out);
+module Check(
+    input in1, in2, in3, in4,
+    
+    output out
+);
     
     wire w1, w2, w3, w4, w5;
     

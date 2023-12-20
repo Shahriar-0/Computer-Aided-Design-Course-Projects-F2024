@@ -1,13 +1,14 @@
-module MUX2REG #(parameter bits = 3) (
+module MUX2REG #(parameter XLEN = 5) (
     input clock, reset, enable,
-    input [bits-1:0] A, B, 
+    input [XLEN-1:0] A, B, 
     input select,
-    output reg [bits-1:0] out 
+    
+    output reg [XLEN-1:0] out 
 );
 
     genvar i;
     generate
-        for (i = 0; i < bits; i = i + 1) begin : bit_mux
+        for (i = 0; i < XLEN; i = i + 1) begin : bit_mux
             __ACT_S2 #(1) mux2reg(
                 .clock(clock),
                 .reset(reset),

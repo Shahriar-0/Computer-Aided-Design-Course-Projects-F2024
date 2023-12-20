@@ -1,12 +1,10 @@
-module DP #(parameter XLEN = 32)
-           (input clk,
-            rst,
-            ldX,
-            ldTmp,
-            selTmp,
-            output done,
-            output [XLEN - 1:0] maxnumber);
-    
+module DP #(parameter XLEN = 32) (
+    input clk, rst, ldX, ldTmp, selTmp,
+
+    output done,
+    output [XLEN - 1:0] maxnumber
+);
+
     wire [XLEN - 1:0] readData1, readData2, readData3, readData4;
     wire [1:0] decoderOut;
     wire [XLEN - 1:0] relu1Out, relu2Out, relu3Out, relu4Out;

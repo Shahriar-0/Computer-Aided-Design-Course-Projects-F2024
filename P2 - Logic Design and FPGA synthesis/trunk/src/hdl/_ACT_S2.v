@@ -1,12 +1,12 @@
-module __ACT_S2 #(parameter bits = 2) (
+module __ACT_S2 #(parameter XLEN = 2) (
     input clock, reset,
-    input [bits - 1 : 0] D00, D01, D10, D11,
+    input [XLEN - 1 : 0] D00, D01, D10, D11,
     input A1, B1, A0, B0,
 
-    output reg [bits - 1 : 0] out
+    output reg [XLEN - 1 : 0] out
 );
     wire S0, S1;
-    wire [bits - 1 : 0] D;
+    wire [XLEN - 1 : 0] D;
 
     assign S0 = (A0 & B0);
     assign S1 = (A1 | B1);

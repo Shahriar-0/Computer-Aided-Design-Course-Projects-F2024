@@ -1,5 +1,6 @@
 module XOR3 (
     input A, B, C,
+    
     output out
 );
     wire out1;

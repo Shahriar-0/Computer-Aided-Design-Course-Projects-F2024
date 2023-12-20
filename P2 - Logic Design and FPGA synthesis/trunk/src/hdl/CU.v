@@ -4,13 +4,11 @@
 `define ADD  3'd3
 `define LD   3'd4
 
-module CU(input clk,
-          rst,
-          start,
-          done,
-          output reg ldTmp,
-          selTmp,
-          ldX);
+module CU(
+    input clk, rst, start, done,
+    
+    output reg ldTmp, selTmp, ldX
+);
     
     reg [2:0] ns, ps;
     

@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
 module ZeroExtend2to3_TB;
 
@@ -13,15 +13,12 @@ module ZeroExtend2to3_TB;
 
     initial begin
         in = 0;
-
         #100;
-        
         $display("Time\tIn\tOut");
         #10 in = 2'b00; $display("%g\t%b\t%b", $time, in, out);
         #10 in = 2'b01; $display("%g\t%b\t%b", $time, in, out);
         #10 in = 2'b10; $display("%g\t%b\t%b", $time, in, out);
         #10 in = 2'b11; $display("%g\t%b\t%b", $time, in, out);
-
         #10 $stop;
     end
       

@@ -1,8 +1,8 @@
-module __ACT_C2 #(parameter bits = 2) (
-    input [bits - 1 : 0] D00, D01, D10, D11,
+module __ACT_C2 #(parameter XLEN = 2) (
+    input [XLEN - 1 : 0] D00, D01, D10, D11,
     input A1, B1, A0, B0,
 
-    output [bits - 1 : 0] out
+    output [XLEN - 1 : 0] out
 );
     wire S0, S1;
     assign S0 = (A0 & B0);

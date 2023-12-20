@@ -1,11 +1,9 @@
-module DataMemory #(parameter XLEN = 32)
-                   (input clk,
-                    rst,
-                    output [XLEN - 1:0] readData1,
-                    readData2,
-                    readData3,
-                    readData4);
+module DataMemory #(parameter XLEN = 32) (
+    input clk, rst,
     
+    output [XLEN - 1:0] readData1, readData2, readData3, readData4
+);
+
     reg [XLEN - 1:0] DM [3:0];
     
     initial begin

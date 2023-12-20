@@ -1,5 +1,6 @@
 module BIT_MULT(
     input xi, yi, pi, ci,
+    
     output xo, yo, po, co
 );
     wire xy, pi_and_xy, pi_and_ci, xy_and_ci;

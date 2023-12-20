@@ -1,17 +1,17 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
 module MUX8REG_TB();
 
-    parameter bits = 3;
+    parameter XLEN = 5;
 
     reg clock;
     reg reset;
-    reg [bits-1:0] A, B, C, D, E, F, G, H;
+    reg [XLEN-1:0] A, B, C, D, E, F, G, H;
     reg [2:0] select;
 
-    wire [bits-1:0] out;
+    wire [XLEN-1:0] out;
 
-    MUX8REG #(bits) uut (
+    MUX8REG #(XLEN) uut (
         .clock(clock),
         .reset(reset),
         .A(A),

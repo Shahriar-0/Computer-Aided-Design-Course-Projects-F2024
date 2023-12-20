@@ -1,4 +1,4 @@
-module ZeroExtend2to3(
+module ZeroExtend2to3 (
     input wire [1:0] in,
     output wire [2:0] out
 );

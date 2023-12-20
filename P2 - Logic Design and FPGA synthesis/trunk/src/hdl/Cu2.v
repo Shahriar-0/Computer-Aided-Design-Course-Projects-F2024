@@ -4,13 +4,12 @@
 `define ADD  3'd3
 `define LD   3'd4
 
-module CU(input clk,
-          rst,
-          start,
-          done,
-          output reg ldTmp,
-          selTmp,
-          ldX);
+module CU(
+    input clk, rst, start, done,
+
+    output reg ldTmp, selTmp, ldX
+);
+
     wire top_left_mux_out;
     wire [1:0] middle_left_mux_out;
     wire [1:0]low_left_mux_out;

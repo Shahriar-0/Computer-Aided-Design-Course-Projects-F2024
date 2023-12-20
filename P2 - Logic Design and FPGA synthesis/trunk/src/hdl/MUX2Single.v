@@ -1,10 +1,10 @@
-module MUX2Single #(parameter bits = 1) (
-    input [bits - 1 : 0] A, B,
+module MUX2Single #(parameter XLEN = 1) (
+    input [XLEN - 1 : 0] A, B,
     input select,
 
-    output [bits - 1 : 0] out
+    output [XLEN - 1 : 0] out
 );
 
-    __ACT_C2 #(bits) mux2(A, B, 0, 0, 0, 0, select, 1, out);
+    __ACT_C2 #(XLEN) mux2(A, B, 0, 0, 0, 0, select, 1, out);
 
 endmodule

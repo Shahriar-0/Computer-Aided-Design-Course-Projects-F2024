@@ -1,8 +1,9 @@
 module Mux2to1 #(parameter XLEN = 32)
-                (input [XLEN - 1:0] a,
-                 b,
-                 input sel,
-                 output [XLEN - 1:0] out);
+    (input [XLEN - 1:0] a, b,
+    input sel,
+
+    output [XLEN - 1:0] out
+);
     
     assign out = (~sel)? a : b;
     

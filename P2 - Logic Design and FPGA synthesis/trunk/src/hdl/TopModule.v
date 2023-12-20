@@ -1,9 +1,9 @@
-module TopModule #(parameter XLEN = 32)
-                  (input clk,
-                   rst,
-                   start,
-                   output done,
-                   output [XLEN - 1:0] maxnumber);
+module TopModule #(parameter XLEN = 32) (
+    input clk, rst, start,
+
+    output done,
+    output [XLEN - 1:0] maxnumber
+);
     
     wire ldX, ldTmp, selTmp, doneInternal;
     
