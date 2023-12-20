@@ -4,16 +4,16 @@ module bitmult (
     output xout, yout, cout, pout 
 );
     
-    wire xy, pxy, cxy, pc;
+    wire xy, xy, cxy, c;
     AND3 and_0(1, xin, yin, xy);
-    AND3 and_1(1, pin, xy, pxy);
+    AND3 and_1(1, in, xy, xy);
     AND3 and_2(1, cin, xy, cxy);
-    AND3 and_3(1, pin, cin, pc);
-    OR3 or_0(pxy, cxy, pc, cout);
+    AND3 and_3(1, in, cin, c);
+    OR3 or_0(xy, cxy, c, cout);
 
-    wire p_xor_xy;
-    XOR2 xor_1(pin, xy, p_xor_xy);
-    XOR2 xor_2(p_xor_xy, cin, pout);
+    wire _xor_xy;
+    XOR2 xor_1(in, xy, _xor_xy);
+    XOR2 xor_2(_xor_xy, cin, out);
     
     assign xout = xin;
     assign yout = yin;
