@@ -4,6 +4,6 @@ module AND2 (
     output out
 );
 
-    __ACT_C1 and3(0, 0, 0, 0, 1, B, A, 0, out);
+    __ACT_C1 and2(0, 0, 0, 0, 1, B, A, 0, out);
 
 endmodule

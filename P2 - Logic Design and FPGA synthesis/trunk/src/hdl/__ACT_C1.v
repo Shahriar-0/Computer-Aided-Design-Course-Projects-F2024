@@ -1,4 +1,4 @@
-module __ACT_C1 (
+module __ACT_C1 ( // this module is based on the __ACT_C1 module
     input A0, A1, SA, B0, B1, SB, S0, S1,
 
     output out
@@ -9,6 +9,7 @@ module __ACT_C1 (
     assign F1 = (SA == 1) ? A1 : A0;
     assign F2 = (SB == 1) ? B1 : B0;
     assign S2 = (S0 | S1);
+    
     assign out = (S2 == 1) ? F2 : F1;
 
 endmodule

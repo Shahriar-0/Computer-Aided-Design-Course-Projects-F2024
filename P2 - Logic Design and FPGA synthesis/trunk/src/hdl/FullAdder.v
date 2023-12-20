@@ -1,8 +1,9 @@
-module Adder (
+module FullAdder (
     input A, B, carry_in,
 
     output sum, carry_out
 );
+
     wire w1, w2, w3;
 
     XOR2 x1(A, B, w1);
