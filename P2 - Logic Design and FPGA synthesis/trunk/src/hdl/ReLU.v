@@ -1,4 +1,4 @@
-module ReLU #(parameter XLEN = 32) (
+module ReLU #(parameter XLEN = 5) (
     input wire [XLEN - 1:0] in,
 
     output wire [XLEN - 1:0] out

@@ -1,4 +1,4 @@
-module TopModule #(parameter XLEN = 32) (
+module TopModule #(parameter XLEN = 5) (
     input clk, rst, start,
 
     output done,

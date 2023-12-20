@@ -1,4 +1,4 @@
-module Mux4to1 #(parameter XLEN = 32) (
+module Mux4to1 #(parameter XLEN = 5) (
     input [XLEN - 1:0] a, b, c, d,
     input [1:0] sel,
 

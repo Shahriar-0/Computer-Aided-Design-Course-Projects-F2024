@@ -1,4 +1,4 @@
-module Register #(parameter XLEN = 32) (
+module Register #(parameter XLEN = 5) (
     input clk, rst, ld,
     input [XLEN - 1:0] in,
 

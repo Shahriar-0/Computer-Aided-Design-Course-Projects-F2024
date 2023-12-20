@@ -1,4 +1,4 @@
-module DataMemory #(parameter XLEN = 32) (
+module DataMemory #(parameter XLEN = 5) (
     input clk, rst,
     
     output [XLEN - 1:0] readData1, readData2, readData3, readData4

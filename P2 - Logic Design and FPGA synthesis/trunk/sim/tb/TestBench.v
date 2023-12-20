@@ -3,7 +3,7 @@
 module TestBench();
     reg clk, rst, start;
     wire done;
-    wire [31:0] maxnumber;
+    wire [5:0] maxnumber;
     
     TopModule topModule(.clk(clk), .rst(rst), .start(start), .maxnumber(maxnumber), .done(done));
     

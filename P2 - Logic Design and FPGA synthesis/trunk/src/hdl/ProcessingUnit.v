@@ -1,5 +1,5 @@
 
-module ProcessingUnit #(parameter XLEN = 32) (
+module ProcessingUnit #(parameter XLEN = 5) (
     input [XLEN - 1:0] num1, num2, num3, num4,
     input [XLEN - 1:0] weight1, weight2, weight3, weight4,
     input clk, rst,
