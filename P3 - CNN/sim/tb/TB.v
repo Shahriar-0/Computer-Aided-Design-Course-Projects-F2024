@@ -1,18 +1,19 @@
 `timescale 1ns/1ns
 
 module TB();
-
-    wire [4:0] max;
+    reg clock, reset;
+    reg [7:0] x = 16, y = 0, z = 0;
     wire done;
-    
-    
-    always #5 clk = ~clk;
+
+    mainProccess #(4) cv(clock, reset, x, y, z, done);
+    always begin
+        #5 clock = ~clock;
+    end
 
     initial begin
-        #10 rst = 0;
-        #10 rst = 1;
-        #10 rst = 0;
-        #400 $stop;
+        #10 reset = 1;
+        #10 clock = 0;
+        #45000 $stop;
     end
     
 endmodule
