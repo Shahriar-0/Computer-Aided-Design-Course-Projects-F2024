@@ -11,10 +11,10 @@ module buffer4x16(clk, shift, en, dataIn, readIdx, dataOut);
 	integer i,j;
 	always@(posedge clk)begin
 		 for (i = 0; i < 4; i = i + 1) begin
-    			dataOut[i * 4] 	 <= buffer[i][readIdx];
-    			dataOut[i * 4 + 1] <= buffer[i][readIdx + 1];
-   				dataOut[i * 4 + 2] <= buffer[i][readIdx + 2];
-    			dataOut[i * 4 + 3] <= buffer[i][readIdx + 3];
+			dataOut[i * 4] 	   <= buffer[i][readIdx];
+			dataOut[i * 4 + 1] <= buffer[i][readIdx + 1];
+			dataOut[i * 4 + 2] <= buffer[i][readIdx + 2];
+			dataOut[i * 4 + 3] <= buffer[i][readIdx + 3];
   		end
 	end
 
@@ -28,7 +28,7 @@ module buffer4x16(clk, shift, en, dataIn, readIdx, dataOut);
 		else begin
 			for(i = 0; i < 16; i = i + 1)begin
 				if(en[15 - i]) begin
-					buffer[3][i ]    = dataIn[0];
+					buffer[3][i]     = dataIn[0];
 					buffer[3][i + 1] = dataIn[1];
 					buffer[3][i + 2] = dataIn[2];
 					buffer[3][i + 3] = dataIn[3];
