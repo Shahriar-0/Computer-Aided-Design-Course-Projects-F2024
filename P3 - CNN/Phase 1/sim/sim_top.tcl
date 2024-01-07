@@ -16,13 +16,13 @@
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/buffer4x16.v   
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/buffer4x4.v    
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/controller.v   
+	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/datapath.v   
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter13.v    
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter16.v    
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter3.v     
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter4.v     
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter43.v    
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counter64.v    
-	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/ctoN.v         
+	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/counterN.v    
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/filterBuffer.v 
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/mac.v          
 	vlog 	+acc -incr -source  +define+SIM 	$hdl_path/mainProccess.v 

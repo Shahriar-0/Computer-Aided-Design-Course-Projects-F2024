@@ -1,6 +1,7 @@
-module mux16to1(sel, in, out);
-    input [3:0] sel;
+module mux16to1(in, sel, out);
+
     input [7:0] in [0:15];
+    input [3:0] sel;
     output reg [7:0] out; 
 
     always @(*) begin
@@ -24,4 +25,5 @@ module mux16to1(sel, in, out);
             default: out = 8'b0;
         endcase
     end
+    
 endmodule
