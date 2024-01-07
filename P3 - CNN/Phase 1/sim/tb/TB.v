@@ -6,9 +6,8 @@ module TB();
     wire done;
 
     mainProccess #(4) cv(clock, reset, x, y, z, done);
-    always begin
-        #5 clock = ~clock;
-    end
+
+    always #5 clock = ~clock;
 
     initial begin
         #10 reset = 1;
