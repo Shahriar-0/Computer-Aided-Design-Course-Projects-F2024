@@ -4,7 +4,7 @@ module bitmult (
     output xout, yout, cout, pout 
 );
     
-    wire xy, xy, cxy, c;
+    wire xy, cxy, c;
     AND3 and_0(1, xin, yin, xy);
     AND3 and_1(1, in, xy, xy);
     AND3 and_2(1, cin, xy, cxy);
