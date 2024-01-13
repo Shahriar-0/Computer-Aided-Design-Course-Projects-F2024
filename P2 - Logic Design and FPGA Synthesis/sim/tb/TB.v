@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 module TB();
-
+    reg clk, rst;
     wire [4:0] max;
     wire done;
     MaxNet m(clk, rst, done, max);
