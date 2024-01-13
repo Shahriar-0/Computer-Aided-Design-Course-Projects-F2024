@@ -5,9 +5,9 @@ module count64(clk, rst, en, cout, num);
 	output reg [5:0] num;
 
 	always @(posedge clk or posedge rst) begin
-		if(rst)
+		if (rst)
 			num <= 6'b000000;
-		else if(en)
+		else if (en)
 			num <= num+1;
 	end
 

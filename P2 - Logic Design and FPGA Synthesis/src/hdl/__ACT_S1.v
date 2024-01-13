@@ -10,7 +10,7 @@ module Actel_S1(
     wire[1:0] sel = {S1, S0};
 
     always @(posedge clk or posedge rst) begin
-        if(rst)  
+        if (rst)  
             out <= 1'b0;
         else begin
             case(sel)

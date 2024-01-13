@@ -14,7 +14,7 @@ module DataMemoryW (
     assign w3 = w[3];
 
     always @(clk) begin
-        if(read)
+        if (read)
             $readmemb("files/weight.txt", w);
     end
     

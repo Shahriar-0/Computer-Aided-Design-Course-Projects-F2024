@@ -9,7 +9,7 @@ module buffer4x16(clk, shift, en, dataIn, readIdx, dataOut);
 	reg [7:0] buffer [0:3][0:15];
 
 	integer i,j;
-	always@(posedge clk)begin
+	always @(posedge clk)begin
 		 for (i = 0; i < 4; i = i + 1) begin
 			dataOut[i * 4] 	   <= buffer[i][readIdx];
 			dataOut[i * 4 + 1] <= buffer[i][readIdx + 1];
@@ -18,16 +18,16 @@ module buffer4x16(clk, shift, en, dataIn, readIdx, dataOut);
   		end
 	end
 
-	always@(posedge clk)begin
-		if(shift) begin
+	always @(posedge clk)begin
+		if (shift) begin
 			for (i = 0; i < 3; i = i + 1)  begin
         		for (j = 0; j < 16; j = j + 1) 
           				buffer[i][j] <= buffer[i + 1][j];
       			end
 		end
 		else begin
-			for(i = 0; i < 16; i = i + 1)begin
-				if(en[15 - i]) begin
+			for (i = 0; i < 16; i = i + 1)begin
+				if (en[15 - i]) begin
 					buffer[3][i]     = dataIn[0];
 					buffer[3][i + 1] = dataIn[1];
 					buffer[3][i + 2] = dataIn[2];

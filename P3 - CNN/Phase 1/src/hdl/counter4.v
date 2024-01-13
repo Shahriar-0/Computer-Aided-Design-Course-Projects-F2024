@@ -5,9 +5,9 @@ module count4(clk, rst, en, cout, num);
 	output reg [1:0] num;
 
 	always @(posedge clk or posedge rst) begin
-		if(rst)
+		if (rst)
 			num <= 2'b00;
-		else if(en)
+		else if (en)
 			num <= num + 1;
 	end
 

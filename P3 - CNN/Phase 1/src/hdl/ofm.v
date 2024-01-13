@@ -8,8 +8,8 @@ module ofm(clk, address, wrData, wr, rdData);
 
 
 	reg [31:0] mem[0:42];
-	always@(posedge clk) begin
-		if(wr) begin
+	always @(posedge clk) begin
+		if (wr) begin
 			mem[address][31:24] = wrData[0];
 			mem[address][23:16] = wrData[1];
 			mem[address][15:8] = wrData[2];

@@ -5,9 +5,9 @@ module count16(clk, rst, en, cout, num);
 	output reg [3:0] num;
 
 	always @(posedge clk or posedge rst) begin
-		if(rst)
+		if (rst)
 			num <= 4'b0000;
-		else if(en)
+		else if (en)
 			num <= num+1;
 	end
 

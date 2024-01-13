@@ -6,7 +6,7 @@ module DataMemoryX (
     reg [4:0] to_save [3:0];
 
     always @(posedge clk) begin
-        if(read)
+        if (read)
             $readmemb("files/input.txt", to_save);
     end
 

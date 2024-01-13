@@ -10,7 +10,7 @@ module filterBuffer(clk, dataIn, en, dataOut);
     always @(posedge clk) begin
         exitLoop = 0; 
         for (i = 0; i < 16 && !exitLoop; i = i + 1) begin
-            if(en[15 - i]) begin
+            if (en[15 - i]) begin
                 if (i + 3 < 16) begin
                     dataOut[i]     = dataIn[0];
                     dataOut[i + 1] = dataIn[1];

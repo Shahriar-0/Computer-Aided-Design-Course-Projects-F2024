@@ -23,7 +23,7 @@ module controller #(parameter N) (clk, start, num,
 	
 	reg[4:0] ps=5'b0, ns;
     integer i;
-	always@(ps, start, cout3, cout5, cout7, cout8, cout11) begin
+	always @(ps, start, cout3, cout5, cout7, cout8, cout11) begin
 		{en2, en3, en4, en5, en6, en7, en8, en9, en10, en11, en12, 
          rst3, rst5, rst6, rst7, rst8, rst9, rst11, rst12, rstN, 
          sel, shift, wr, done} = 55'b0;
@@ -92,6 +92,6 @@ module controller #(parameter N) (clk, start, num,
         endcase
     end
 
-	always@(posedge clk) ps <= ns;
+	always @(posedge clk) ps <= ns;
     
 endmodule
