@@ -17,7 +17,7 @@ module mainProccess #(parameter N) (clk,start,X,Y,Z,doneOut);
 	wire [15:0] en1 [0:N-1]; 
 
 	wire [15:0] en1_2 [0:3];
-	controller #N myController1(
+	controller #(N) myController1(
 	.clk(clk), .start(start), 
 	.cout3(cout3), .cout5(cout5), .cout6(cout6), .cout7(cout7), .cout8(cout8),
 	.cout9(cout9), .cout11(cout11), .en1(en1), .en2(en2), .en3(en3),
@@ -35,7 +35,7 @@ module mainProccess #(parameter N) (clk,start,X,Y,Z,doneOut);
 	.rst9_2(rst9_2), .rst6_2(rst6_2), .rst13(rst13), .rst14(rst14), .rst7_2(rst7_2),
 	.rst12_2(rst12_2), .rst8_2(rst8_2), .rst5_2(rst5_2), .done_2(done_2));
 
-	dataPath #N myDataPath(
+	dataPath #(N) myDataPath(
 	.clk(clk), .rst6(rst6), .rst7(rst7), .rst9(rst9), .en6(en6),
 	.en7(en7), .en9(en9), .cout6(cout6), .cout7(cout7), .cout9(cout9),
 	.sel(sel), .done(done), .wr(wr), .rst11(rst11), .en11(en11),
